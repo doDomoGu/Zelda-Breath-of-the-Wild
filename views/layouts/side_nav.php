@@ -12,6 +12,12 @@
                 首页
             </a>
         </li>
+        <li class="menu-single <?=$this->context->id=='item'?'active':''?>">
+            <a href="/item">
+                <span class="menu-icon glyphicon glyphicon-inbox"></span>
+                物品
+            </a>
+        </li>
         <!--<li class="menu-list <?/*=$this->context->id=='system2'?'nav-active':''*/?>">
             <a href="javascript:void(0);" class="<?/*=$this->context->id=='system2'?'':'collapsed'*/?>">
                 <span class="menu-icon glyphicon glyphicon-cog"></span>
