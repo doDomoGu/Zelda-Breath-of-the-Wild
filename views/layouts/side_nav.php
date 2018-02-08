@@ -1,4 +1,6 @@
 <?php
+use yii\bootstrap\Html;
+
     //手动引入bootstrap.js
     //**由于有可能没有调用任何bootstrap组件   **使用Asset依赖注册不会重复引入js文件
     yii\bootstrap\BootstrapPluginAsset::register($this);
@@ -6,43 +8,54 @@
 
 <div class="side-nav">
     <ul class="nav nav-pills nav-stacked">
-        <li class="menu-single <?=$this->context->id=='site'?'active':''?>">
+        <li class="menu-single <?=$this->context->id=='site' && $this->context->action->id=='index'?'active':''?>">
             <a href="/">
                 <span class="menu-icon glyphicon glyphicon-inbox"></span>
                 首页
             </a>
         </li>
-        <li class="menu-single <?=$this->context->id=='item'?'active':''?>">
-            <a href="/item">
-                <span class="menu-icon glyphicon glyphicon-inbox"></span>
-                物品
-            </a>
-        </li>
-        <!--<li class="menu-list <?/*=$this->context->id=='system2'?'nav-active':''*/?>">
-            <a href="javascript:void(0);" class="<?/*=$this->context->id=='system2'?'':'collapsed'*/?>">
+        <li class="menu-list <?=$this->context->id=='item'?'nav-active':''?>">
+            <a href="javascript:void(0);" class="<?=$this->context->id=='item'?'':'collapsed'?>">
                 <span class="menu-icon glyphicon glyphicon-cog"></span>
-                系统设置
+                物品
                 <span class="sub-menu-collapsed glyphicon glyphicon-plus"></span>
                 <span class="sub-menu-collapsed-in glyphicon glyphicon-minus"></span>
             </a>
-            <ul class="sub-menu-list collapse <?/*=$this->context->id=='system2'?'in':''*/?>" id="system-collapse">
-                <li class="<?/*=$this->context->id=='system2' && $this->context->action->id=='global-config'?'active':''*/?>">
+            <ul class="sub-menu-list collapse <?=$this->context->id=='item'?'in':''?>" id="system-collapse">
+                <li class="<?=$this->context->id=='item' && $this->context->action->id=='global-config'?'active':''?>">
                     <a href="/system2/global-config">
-                        参数设置
+                        列表
                     </a>
                 </li>
-                <li class="<?/*=$this->context->id=='system2' && $this->context->action->id=='function2'?'active':''*/?>">
+                <?php if(!Yii::$app->user->isGuest):?>
+                <li class="<?=$this->context->id=='item' && $this->context->action->id=='function2'?'active':''?>">
                     <a href="/system2/function2">
-                        功能二(测试用)
+                        添加
                     </a>
                 </li>
-                <li class="<?/*=$this->context->id=='system2' && $this->context->action->id=='function3'?'active':''*/?>">
+                <?php endif;?>
+                <!--<li class="<?/*=$this->context->id=='item' && $this->context->action->id=='function3'?'active':''*/?>">
                     <a href="/system2/function3">
                         功能三(测试用)
                     </a>
-                </li>
+                </li>-->
             </ul>
-        </li>-->
+        </li>
+        <?php if(!Yii::$app->user->isGuest):?>
+        <li class="menu-single">
+            <a href="/site/logout">
+                <span class="menu-icon glyphicon glyphicon-inbox"></span>
+                （<?=Yii::$app->user->identity->username?>） 退出
+            </a>
+        </li>
+        <?php else:?>
+        <li class="menu-single <?=$this->context->id=='site' && $this->context->action->id=='login'?'active':''?>">
+            <a href="/site/login">
+                <span class="menu-icon glyphicon glyphicon-inbox"></span>
+                登录
+            </a>
+        </li>
+        <?php endif;?>
         <!--<li class="menu-single <?/*=$this->context->id=='user'?'active':''*/?>">
             <a href="<?/*=AdminFunc::adminUrl('user')*/?>">
                 <span class="menu-icon glyphicon glyphicon-refresh"></span>
