@@ -52,17 +52,17 @@ class Item extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name_cn' => 'Name Cn',
-            'name_en' => 'Name En',
-            'name_jp' => 'Name Jp',
-            'category_id' => 'Category ID',
-            'img_url' => 'Img Url',
-            'describe_cn' => 'Describe Cn',
-            'describe_en' => 'Describe En',
-            'describe_jp' => 'Describe Jp',
+            'name_cn' => '名称',
+            'name_en' => 'Name',
+            'name_jp' => 'Name_Jp',
+            'category_id' => '物品类型',
+            'img_url' => '图片',
+            'describe_cn' => '描述',
+            'describe_en' => 'Describe',
+            'describe_jp' => 'Describe_Jp',
             'status' => 'Status',
             'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'updated_at' => '最后修改时间',
         ];
     }
 }

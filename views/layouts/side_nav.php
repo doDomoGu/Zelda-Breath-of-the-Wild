@@ -22,23 +22,18 @@ use yii\bootstrap\Html;
                 <span class="sub-menu-collapsed-in glyphicon glyphicon-minus"></span>
             </a>
             <ul class="sub-menu-list collapse <?=$this->context->id=='item'?'in':''?>" id="system-collapse">
-                <li class="<?=$this->context->id=='item' && $this->context->action->id=='global-config'?'active':''?>">
-                    <a href="/system2/global-config">
+                <li class="<?=$this->context->id=='item' && $this->context->action->id=='index'?'active':''?>">
+                    <a href="/item">
                         列表
                     </a>
                 </li>
                 <?php if(!Yii::$app->user->isGuest):?>
-                <li class="<?=$this->context->id=='item' && $this->context->action->id=='function2'?'active':''?>">
-                    <a href="/system2/function2">
+                <li class="<?=$this->context->id=='item' && $this->context->action->id=='add'?'active':''?>">
+                    <a href="/item/add">
                         添加
                     </a>
                 </li>
                 <?php endif;?>
-                <!--<li class="<?/*=$this->context->id=='item' && $this->context->action->id=='function3'?'active':''*/?>">
-                    <a href="/system2/function3">
-                        功能三(测试用)
-                    </a>
-                </li>-->
             </ul>
         </li>
         <?php if(!Yii::$app->user->isGuest):?>

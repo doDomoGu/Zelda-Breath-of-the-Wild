@@ -1,38 +1,53 @@
 <?php
 
-use yii\widgets\LinkPager;
-$this->title = '物品';
+use yii\helpers\Html;
+use yii\grid\GridView;
+use app\models\ItemSearch;
 
+/* @var $this yii\web\View */
+/* @var $searchModel app\models\ItemSearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */
+
+$this->title = 'Items';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-<!--<div>
-    <a class="btn btn-success" target="_blank" href="/admin/site/export">导出</a>
-    <br/>
-    <br/>
-</div>-->
-<table class="table table-striped">
-    <tr>
-        <th>#</th>
-        <th>物品名称</th>
-        <th>种类</th>
-        <th>图片</th>
-        <th>描述</th>
-        <!--<th>设备代理</th>-->
-    </tr>
-    <?php foreach($list as $l){ ?>
-        <tr>
-            <td><?=$l->id?></td>
-            <td><?=$l->name_cn?></td>
-            <td><?=$l->category_id?></td>
-            <td><?=$l->img_url?></td>
-            <td><?=$l->describe_cn?></td>
-            <!--<td><?/*=$val->user_agent*/?></td>-->
-        </tr>
-    <?php } ?>
-</table>
-<div class="text-center">
-    <?=
-    LinkPager::widget([
-        'pagination' => $pages,
-    ]);
-    ?>
+<div class="item-index">
+
+    <h1><?= Html::encode($this->title) ?></h1>
+    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+
+    <p>
+        <?= Html::a('Create Item', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
+
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+
+            'id',
+            'name_cn',
+//            'name_en',
+//            'name_jp',
+            //'category_id',
+            [
+                'attribute' => 'category_id',
+                'label'=>'类型',
+                'value' => function ($model) {
+                    return ItemSearch::dropDown('category_id', $model->category_id);
+                },
+                'filter' => ItemSearch::dropDown('category_id'),
+            ],
+            'img_url:image',
+            'describe_cn',
+//            'describe_en',
+//            'describe_jp',
+//            'status',
+//            'created_at',
+            'updated_at',
+
+            ['class' => 'yii\grid\ActionColumn'],
+        ],
+    ]); ?>
 </div>
